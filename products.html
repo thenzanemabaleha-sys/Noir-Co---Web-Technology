@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noir & Co — The Collection</title>
+  <link rel="stylesheet" href="nav_and_footer.css"/>
+  <style>
+    .page-header {
+      background-color: #111111;
+      padding: 72px 40px;
+      text-align: center;
+    }
+
+    .page-header .small-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c8a45a;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .page-header h1 {
+      font-family: Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: normal;
+      color: #f4efe4;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 em { font-style: italic; color: #c8a45a; }
+
+    .page-header p {
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      color: #888888;
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── SHARED ── */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c8a45a;
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      font-weight: normal;
+      color: #1a1a1a;
+      margin-bottom: 18px;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    .section-title em { font-style: italic; color: #c8a45a; }
+    .section-title.light { color: #f4efe4; }
+
+
+    .catalog-section {
+      background-color: #faf7f2;
+      padding: 72px 0;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border: 1px solid #e0ddd6;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #c8a45a;
+      color: #111111;
+      font-family: Arial, sans-serif;
+      font-size: 0.6rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .product-badge.new {
+      background-color: #1a1a1a;
+      color: #c8a45a;
+      border: 1px solid #c8a45a;
+    }
+
+    .product-thumb {
+      height: 220px;
+      background-color: #1a1509;
+      overflow: hidden;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bg2 { background-color: #091510; }
+    .bg3 { background-color: #170e07; }
+    .bg4 { background-color: #080e18; }
+    .bg5 { background-color: #080808; }
+    .bg6 { background-color: #18160a; }
+
+    .product-body { padding: 20px 18px 22px; }
+
+    .product-cat {
+      font-family: Arial, sans-serif;
+      font-size: 0.63rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c8a45a;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .product-name {
+      font-family: Georgia, serif;
+      font-size: 1.2rem;
+      color: #1a1a1a;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .product-notes {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #888888;
+      line-height: 1.55;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .product-desc {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: #666666;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #f0ede6;
+      padding-top: 12px;
+    }
+
+    .product-price {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #1a1a1a;
+    }
+
+    .product-sizes {
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      color: #aaaaaa;
+    }
+
+    .add-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 11px;
+      background-color: #1a1a1a;
+      color: #f4efe4;
+      border: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .add-btn:hover {
+      background-color: #c8a45a;
+      color: #111111;
+    }
+
+    .pricing-section {
+      background-color: #111111;
+      padding: 72px 0;
+    }
+
+    .pricing-section .section-label { color: #c8a45a; }
+
+    .pricing-intro {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: #888888;
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 36px;
+      margin-left: 28%;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .pricing-card {
+      background-color: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 24px 20px;
+    }
+
+    .pricing-card:hover {
+      border-color: #c8a45a;
+    }
+
+    .pricing-card .p-name {
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      color: #f4efe4;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card .p-family {
+      font-family: Arial, sans-serif;
+      font-size: 0.65rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666666;
+      margin-bottom: 16px;
+    }
+
+    .pricing-card .p-sizes {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .pricing-card .p-size-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pricing-card .p-size-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #777777;
+    }
+
+    .pricing-card .p-size-price {
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      color: #c8a45a;
+      font-weight: bold;
+    }
+
+    .pricing-card.discovery {
+      background-color: #1f1a0e;
+      border-color: #c8a45a;
+      grid-column: span 1;
+    }
+
+    .gifts-section {
+      background-color: #faf7f2;
+      padding: 72px 0;
+    }
+
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .gift-card {
+      background-color: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+    }
+
+    .gift-card:hover { border-color: #c8a45a; }
+
+    .gift-image {
+      background-color: #1f1a0e;
+      overflow: hidden;
+    }
+
+    .gift-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gift-info {
+      padding: 26px 22px;
+    }
+
+    .gift-info h4 {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      color: #c8a45a;
+      margin-bottom: 10px;
+    }
+
+    .gift-info p {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: #888888;
+      margin-bottom: 10px;
+    }
+
+    .gift-info ul {
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    .gift-info ul li {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #777777;
+      padding: 3px 0 3px 14px;
+      position: relative;
+    }
+
+    .gift-info ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #c8a45a;
+    }
+
+    .gift-price {
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      color: #f4efe4;
+    }
+
+    @media (max-width: 1000px) { .catalog-grid { grid-template-columns: 1fr 1fr; } }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 24px; }
+      .catalog-section, .pricing-section, .gifts-section { padding: 56px 0; }
+      .page-header { padding: 56px 24px; }
+      .gifts-grid { grid-template-columns: 1fr; }
+      .gift-card { grid-template-columns: 120px 1fr; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .catalog-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .gift-card { grid-template-columns: 1fr; }
+      .gift-image { height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Noir <span class="amp">&</span> Co</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="About.html">About Us</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="business_model.html">Business Model</a></li>
+    <li><a href="contacts.html">Contact Us</a></li>
+  </ul>
+  <div class="search-bar">
+    <input type="text" placeholder="Search fragrances..." />
+    <button>Search</button>
+  </div>
+</nav>
+
+<header class="page-header">
+  <span class="small-label">The Collection</span>
+  <h1>Our <em>Fragrances</em></h1>
+  <p>Eighteen distinct scents. Each one a portrait of a mood, a memory, or a feeling impossible to fully name.</p>
+</header>
+
+<section class="catalog-section">
+  <div class="wrap">
+    <span class="section-label">Full Catalogue</span>
+    <h2 class="section-title">Every <em>Scent</em>, Every Story</h2>
+    <div class="catalog-grid">
+
+      <div class="product-card">
+        <span class="product-badge">Bestseller</span>
+        <div class="product-thumb">
+          
+          <img src="4.jpeg" alt="Rose de Minuit" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Floral</p>
+          <h3 class="product-name">Rose de Minuit</h3>
+          <p class="product-notes">Red Berries &middot; Bulgarian Rose &middot; Sandalwood &middot; White Musk</p>
+          <p class="product-desc">A romantic evening in full bloom. Rich Bulgarian rose, warmed by creamy sandalwood, leaves a trail that lingers like a whispered secret.</p>
+          <div class="product-footer">
+            <span class="product-price">M195</span>
+            <span class="product-sizes">50ml &middot; 100ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb bg2">
+    
+          <img src="6.jpeg" alt="Forêt Profonde" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Woody &middot; Fresh</p>
+          <h3 class="product-name">For&ecirc;t Profonde</h3>
+          <p class="product-notes">Bergamot &middot; Cedarwood &middot; Oakmoss &middot; Vetiver</p>
+          <p class="product-desc">The smell of ancient forests after rain. Grounding, meditative, and utterly timeless.</p>
+          <div class="product-footer">
+            <span class="product-price">M189</span>
+            <span class="product-sizes">50ml &middot; 100ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge new">New</span>
+        <div class="product-thumb bg3">
+      
+          <img src="7.jpeg" alt="Ambre Sacré" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Oriental</p>
+          <h3 class="product-name">Ambre Sacr&eacute;</h3>
+          <p class="product-notes">Cardamom &middot; Amber &middot; Dark Oud &middot; Vanilla</p>
+          <p class="product-desc">Sacred and bold. A warm embrace of amber and oud that commands presence in every room.</p>
+          <div class="product-footer">
+            <span class="product-price">M175</span>
+            <span class="product-sizes">50ml &middot; 100ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb bg4">
+          <img src="8.jpeg" alt="Sel Marin" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Fresh &middot; Aquatic</p>
+          <h3 class="product-name">Sel Marin</h3>
+          <p class="product-notes">Sea Salt &middot; Marine Accord &middot; Driftwood</p>
+          <p class="product-desc">Coastal air, open horizons. A fresh aquatic fragrance that evokes freedom and motion.</p>
+          <div class="product-footer">
+            <span class="product-price">M285</span>
+            <span class="product-sizes">50ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge">Bestseller</span>
+        <div class="product-thumb bg5">
+  
+          <img src="9.jpeg" alt="Minuit Noir" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Oriental &middot; Woody</p>
+          <h3 class="product-name">Minuit Noir</h3>
+          <p class="product-notes">Black Pepper &middot; Midnight Rose &middot; Incense &middot; Oud</p>
+          <p class="product-desc">The signature scent of Noir &amp; Co. Smoky, bold, and deeply seductive. Our most iconic creation.</p>
+          <div class="product-footer">
+            <span class="product-price">M115</span>
+            <span class="product-sizes">50ml &middot; 100ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge new">New</span>
+        <div class="product-thumb bg6">
+
+          <img src="10.jpg" alt="Lumière Dorée" />
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Floral &middot; Oriental</p>
+          <h3 class="product-name">Lumi&egrave;re Dor&eacute;e</h3>
+          <p class="product-notes">Mimosa &middot; Jasmine &middot; Golden Amber &middot; Musk</p>
+          <p class="product-desc">Radiant and effervescent. Sunlight distilled into pure fragrance — golden hour in a bottle.</p>
+          <div class="product-footer">
+            <span class="product-price">M105</span>
+            <span class="product-sizes">50ml</span>
+          </div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section">
+  <div class="wrap">
+    <span class="section-label">Pricing Overview</span>
+    <h2 class="section-title light">Full <em>Pricing List</em></h2>
+    <p class="pricing-intro">All our fragrances come in 50ml and 100ml bottles. You can also order a 2ml sample before committing to a full bottle — we want you to love what you buy.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <p class="p-name">Rose de Minuit</p>
+        <p class="p-family">Floral</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M95.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M160.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M62.00</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <p class="p-name">For&ecirc;t Profonde</p>
+        <p class="p-family">Woody &middot; Fresh</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M89.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M150.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M62.00</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <p class="p-name">Ambre Sacr&eacute;</p>
+        <p class="p-family">Oriental</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M110.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M185.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M64.00</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <p class="p-name">Sel Marin</p>
+        <p class="p-family">Fresh &middot; Aquatic</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M85.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M145.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M60.00</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <p class="p-name">Minuit Noir</p>
+        <p class="p-family">Oriental &middot; Woody</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M115.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M195.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M64.00</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <p class="p-name">Lumi&egrave;re Dor&eacute;e</p>
+        <p class="p-family">Floral &middot; Oriental</p>
+        <div class="p-sizes">
+          <div class="p-size-row"><span class="p-size-label">50 ml</span><span class="p-size-price">M105.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">100 ml</span><span class="p-size-price">M175.00</span></div>
+          <div class="p-size-row"><span class="p-size-label">2 ml sample</span><span class="p-size-price">M63.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gifts-section">
+  <div class="wrap">
+    <span class="section-label">Curated for Gifting</span>
+    <h2 class="section-title">Gift Sets <em>&amp;</em> Bundles</h2>
+    <div class="gifts-grid">
+
+      <div class="gift-card">
+        <div class="gift-image">
+          <img src="SET1.jpeg" alt="The Discovery Kit" />
+        </div>
+        <div class="gift-info">
+          <h4>The Discovery Kit</h4>
+          <p>The perfect introduction to Noir &amp; Co. Six 2ml samples beautifully presented in a matte black box.</p>
+          <ul>
+            <li>6 &times; 2ml sample vials</li>
+            <li>Scent profile card for each fragrance</li>
+            <li>Handwritten gift note (optional)</li>
+          </ul>
+          <span class="gift-price">M1055.00</span>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-image">
+          <img src="SET2.jpg" alt="The Noir Duo" />
+        </div>
+        <div class="gift-info">
+          <h4>The Noir Duo</h4>
+          <p>Choose any two 50ml fragrances presented in our signature matte black gift box with gold ribbon.</p>
+          <ul>
+            <li>2 &times; 50ml full-size bottles</li>
+            <li>Luxury gift box with ribbon</li>
+            <li>Complimentary personalised card</li>
+          </ul>
+          <span class="gift-price">From M1115.00</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-body">
+    <div class="footer-brand">
+      <div class="footer-logo">Noir <em>&amp;</em> Co</div>
+      <p class="tagline">"Where darkness becomes beauty."</p>
+      <p>Artisan fragrance born in Lesotho, loved across the world. Small-batch, vegan, and crafted with care.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">Our Story</a></li>
+        <li><a href="products.html">The Collection</a></li>
+        <li><a href="business_model.html">Business Model</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Information</h5>
+      <ul>
+        <li><a href="contacts.html">Contact Us</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns &amp; Refunds</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="copy">&copy; 2026 Noir &amp; Co. All rights reserved.</span>
+    <div class="legal-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
